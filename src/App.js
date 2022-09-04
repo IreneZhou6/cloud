@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import { Routes, Route } from "react-router-dom";
+
+import MiniDrawer from './components/sideBar/MiniDrawer';
+
 import './App.css';
+
+import Home from './pages/home/Home';
+import ProjectOrder from './pages/order/projectOrder/ProjectOrder';
+import ApplicationOrder from './pages/order/applicationOrder/ApplicationOrder';
+import CloudResourceOrder from './pages/order/cloudResourceOrder/CloudResourceOrder';
+import CloudServiceOrder from './pages/order/cloudServiceOrder/CloudServiceOrder';
+import StickyHeadTable from "./components/table/StickyHeadTable";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/" element={<MiniDrawer />} >
+          <Route index element={<StickyHeadTable />} />
+          <Route path="home" element={<Home />} />
+          <Route path="order/projectOrder" element={<ProjectOrder />} />
+          <Route path="order/applicationOrder" element={<ApplicationOrder />} />
+          <Route path="order/cloudResourceOrder" element={<CloudResourceOrder />} />
+          <Route path="order/cloudServiceOrder" element={<CloudServiceOrder />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
