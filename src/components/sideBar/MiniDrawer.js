@@ -9,11 +9,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import MenuLi from '../menulist/MenuLi';
+import { Avatar, Button } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -114,6 +117,10 @@ export default function MiniDrawer() {
                     <Typography variant="h6" noWrap component="div">
                         政务云服务辅助系统
                     </Typography>
+                    <Stack direction="row" spacing={2}>
+                        <Avatar>头像</Avatar>
+                        <Button>用户名</Button>
+                    </Stack>
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
