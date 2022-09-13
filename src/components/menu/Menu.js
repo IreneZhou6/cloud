@@ -41,9 +41,9 @@ export default function Menu({ menuName, path, id, open }) {
                     sx={{
                         minHeight: 48,
                         justifyContent: open ? 'initial' : 'center',
-                        px: 2.5,
+                        px: 2.5
                     }}>
-                    <Link to={path}>
+                    <Link to={path} >
                         <ListItemIcon
                             sx={{
                                 minWidth: 0,

@@ -1,3 +1,17 @@
+问题：
+1. sidebar 用<Route> + <Outlet> 嵌套其他部分，但是路径是get获取的--不用get获取路径可行吗
+
+2. main 宽度超出屏幕
+
+3. 最后一列固定怎么做
+
+4. 最后一列是操作
+
+5. 筛选项怎么存储，怎么传递给数据库（？看到数据库TAB代表筛选项）
+
+6. 每次请求一页，那筛选的时候应该是重新请求
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
