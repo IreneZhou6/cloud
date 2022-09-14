@@ -4,7 +4,7 @@ import CustomSelect from "../select/CustomSelect";
 import { Button, Paper, TextField } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 
-export default function SearchForm({ setTableData }) {
+export default function SearchForm({ setMyFilter }) {
 
     const options = [
         {
@@ -31,7 +31,9 @@ export default function SearchForm({ setTableData }) {
             status: 1
         }
     });
-    const onSubmit = data => setTableData(data);
+    const onSubmit = data => setMyFilter((prev) => {
+        return { ...prev, ...data }
+    });
     // console.log('outside render')
 
     return (

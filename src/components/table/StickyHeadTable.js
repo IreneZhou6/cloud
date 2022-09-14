@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -23,7 +23,7 @@ const columns = [
     { id: 'operation', label: '操作', minWidth: 80 },
 ];
 // { list, pageNum, size, total, totalpage }
-export default function StickyHeadTable({ data }) {
+export default function StickyHeadTable({ data, setMyFilter }) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -34,7 +34,10 @@ export default function StickyHeadTable({ data }) {
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        console.log(+event.target.value);
+        // console.log(+event.target.value);
+        setMyFilter((prev) => {
+            return { ...prev, pageSize: rowsPerPage }
+        });
         setPage(0);
     };
 
@@ -62,7 +65,7 @@ export default function StickyHeadTable({ data }) {
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => {
                                 return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                         {columns.map((column) => {
                                             const value = row[column.id];
                                             return (

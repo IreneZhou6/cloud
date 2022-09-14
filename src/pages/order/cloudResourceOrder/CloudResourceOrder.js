@@ -7,7 +7,12 @@ import StickyHeadTable from "../../../components/table/StickyHeadTable";
 export default function CloudResourceOrder() {
     const tableDataRef = useRef();
     const [tableData, setTableData] = useState(null);
-    // const [listData, setListData] = useState(null);
+    // const [pageSize, setPageSize] = useState(10);
+    const [myFilter, setMyFilter] = useState({
+        tab: 2,
+        pageNum: 1,
+        pageSize: 10
+    });
 
     const axios = require('axios');
     useEffect(() => {
@@ -18,21 +23,24 @@ export default function CloudResourceOrder() {
             },
             method: 'post',
             url: '/api/v1/project/page',
-            data: {
-                tab: 2,
-                pageNum: 1,
-                pageSize: 10
-            }
+            data: myFilter
         }).then((response) => {
-            console.log(response.data.data);
+            // console.log(response.data.data);
             tableDataRef.current = response.data.data;
-            console.log(tableDataRef.current);
+            // console.log(tableDataRef.current);
+            console.log("axios post")
             setTableData(tableDataRef.current);
         })
             .catch(function (error) {
                 console.log(error);
             });
-    }, [])
+    }, [myFilter])
+
+    console.log(myFilter);
+    console.log(tableData);
+    // function handleDataChange() {
+    //     setMyFilter()
+    // }
     // useEffect(({ pageNum, pageSize, condition }) => {
     //     customFetch('/api/v1/project/page', {
     //         "pageNum": { pageNum },
@@ -54,56 +62,10 @@ export default function CloudResourceOrder() {
     //         .catch(err => console.log(err));
     // }, [])
 
-    // const cloudResource = [{
-    //     id: 90,
-    //     level: 1,
-    //     applicationId: "80",
-    //     applicationName: "台州市政务云平台",
-    //     applicationCode: "A330000100000202105004370",
-    //     projectName: "信访局1111",
-    //     projectCode: "1212",
-    //     projectLeader: "中文",
-    //     projectTelephone: "15222222222",
-    //     packageNum: 0,
-    //     uptime: "2022-08-31",
-    //     downtime: null,
-    //     status: "运行中"
-    // }, {
-    //     id: 90,
-    //     level: 1,
-    //     applicationId: "80",
-    //     applicationName: "台州市政务云平台",
-    //     applicationCode: "A330000100000202105004370",
-    //     projectName: "信访局1111",
-    //     projectCode: "1212",
-    //     projectLeader: "中文",
-    //     projectTelephone: "15222222222",
-    //     packageNum: 0,
-    //     uptime: "2022-08-31",
-    //     downtime: null,
-    //     status: "运行中"
-    // }, {
-    //     id: 91,
-    //     level: 1,
-    //     applicationId: "81",
-    //     applicationName: "台州市政务云平台2",
-    //     applicationCode: "A330000100000202105004371",
-    //     projectName: "信访局",
-    //     projectCode: "12123",
-    //     projectLeader: "中文",
-    //     projectTelephone: "15222222223",
-    //     packageNum: 0,
-    //     uptime: "2022-08-31",
-    //     downtime: null,
-    //     status: "运行中"
-    // }];
-    // const filteredResource = cloudResource.filter();
-
-
     return (
         <div>
-            <SearchForm setTableData={setTableData} />
-            {tableData ? <StickyHeadTable data={tableData} /> : <Paper sx={{ width: '100%', overflow: 'hidden', p: 3 }}>loading</Paper>}
+            <SearchForm setMyFilter={setMyFilter} />
+            {tableData ? <StickyHeadTable data={tableData} setMyFilter={setMyFilter} /> : <Paper sx={{ width: '100%', overflow: 'hidden', p: 3 }}>loading</Paper>}
         </div>
     )
 }
