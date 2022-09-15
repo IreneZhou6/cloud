@@ -7,7 +7,7 @@ import StickyHeadTable from "../../../components/table/StickyHeadTable";
 export default function CloudResourceOrder() {
     const tableDataRef = useRef();
     const [tableData, setTableData] = useState(null);
-    // const [pageSize, setPageSize] = useState(10);
+
     const [myFilter, setMyFilter] = useState({
         tab: 2,
         pageNum: 1,
@@ -38,29 +38,6 @@ export default function CloudResourceOrder() {
 
     console.log(myFilter);
     console.log(tableData);
-    // function handleDataChange() {
-    //     setMyFilter()
-    // }
-    // useEffect(({ pageNum, pageSize, condition }) => {
-    //     customFetch('/api/v1/project/page', {
-    //         "pageNum": { pageNum },
-    //         "pageSize": { pageSize },
-    //         "applicationName": { condition[applicationName] },
-    //         "projectName": { condition.projectName },
-    //         "projectCode": { condition.projectCode },
-    //         "projectLeader": { condition.projectLeader },
-    //         "projectTelephone": { condition.projectTelephone },
-    //         "status": { condition.status },
-    //         "dateTime": { condition.dateTime }
-    //     }, 'POST'
-    //     ).then(resp => resp.json())
-    //         .then(({ data }) => {
-    //             console.log(`data ${data}`);
-    //             setfetchedCloudResource(data);
-    //             console.log(`inside cloud ${cloudResource}`);
-    //         })
-    //         .catch(err => console.log(err));
-    // }, [])
 
     return (
         <div>

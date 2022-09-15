@@ -26,15 +26,30 @@ export default function SearchForm({ setMyFilter }) {
             applicationName: "",
             projectName: "",
             projectCode: "",
-            applicant: "",
-            phoneNumber: "",
+            projectLeader: "",
+            projectTelephone: "",
             status: 1
         }
     });
+
     const onSubmit = data => setMyFilter((prev) => {
         return { ...prev, ...data }
     });
     // console.log('outside render')
+    const handleReset = () => {
+        reset();
+        setMyFilter((prev) => {
+            return {
+                ...prev,
+                applicationName: "",
+                projectName: "",
+                projectCode: "",
+                projectLeader: "",
+                projectTelephone: "",
+                status: 1
+            }
+        })
+    }
 
     return (
         <Paper sx={{ p: 3, mb: 3 }}>
@@ -58,13 +73,13 @@ export default function SearchForm({ setMyFilter }) {
                         <TextField label="项目编码" variant="outlined" {...field} />
                     } />
                 <Controller
-                    name="applicant"
+                    name="projectLeader"
                     control={control}
                     render={({ field }) =>
                         <TextField label="申请人" variant="outlined" {...field} />
                     } />
                 <Controller
-                    name="phoneNumber"
+                    name="projectTelephone"
                     control={control}
                     render={({ field }) =>
                         <TextField label="联系方式" variant="outlined" {...field} />
@@ -77,7 +92,7 @@ export default function SearchForm({ setMyFilter }) {
                 />
 
                 <Button onClick={handleSubmit(onSubmit)} variant={"contained"}>查询</Button>
-                <Button onClick={() => reset()} variant={"outlined"}>重置</Button>
+                <Button onClick={handleReset} variant={"outlined"}>重置</Button>
             </form>
         </Paper>
     )

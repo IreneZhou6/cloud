@@ -1,4 +1,4 @@
-import { useContext, useRef, useState, useEffect } from "react";
+import { useState } from "react";
 
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -36,7 +36,7 @@ export default function StickyHeadTable({ data, setMyFilter }) {
         setRowsPerPage(+event.target.value);
         // console.log(+event.target.value);
         setMyFilter((prev) => {
-            return { ...prev, pageSize: rowsPerPage }
+            return { ...prev, pageSize: +event.target.value }
         });
         setPage(0);
     };
