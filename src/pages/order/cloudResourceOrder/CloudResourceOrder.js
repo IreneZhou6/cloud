@@ -38,6 +38,7 @@ export default function CloudResourceOrder() {
 
     console.log(myFilter);
     console.log(tableData);
+    console.log('cloud source page')
 
     return (
         <div>

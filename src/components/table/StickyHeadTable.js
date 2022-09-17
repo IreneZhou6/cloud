@@ -28,13 +28,16 @@ export default function StickyHeadTable({ data, setMyFilter }) {
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const handleChangePage = (event, newPage) => {
-        console.log(`new page ${newPage}`);
+        // console.log(newPage);
         setPage(newPage);
+        setMyFilter((prev) => {
+            return { ...prev, pageNum: newPage + 1 }
+        });
     };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        // console.log(+event.target.value);
+        console.log(+event.target.value);
         setMyFilter((prev) => {
             return { ...prev, pageSize: +event.target.value }
         });
@@ -42,6 +45,8 @@ export default function StickyHeadTable({ data, setMyFilter }) {
     };
 
     const rows = data.list;
+    // const pageCount = Math.ceil(data.total / rowsPerPage);
+    console.log('table');
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden', p: 3 }}>
@@ -62,7 +67,7 @@ export default function StickyHeadTable({ data, setMyFilter }) {
                     </TableHead>
                     <TableBody>
                         {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
@@ -83,9 +88,9 @@ export default function StickyHeadTable({ data, setMyFilter }) {
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={[10, 50, 100]}
+                rowsPerPageOptions={[5, 10, 50, 100]}
                 component="div"
-                count={rows.length}
+                count={data.total}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

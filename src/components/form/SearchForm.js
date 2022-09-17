@@ -28,7 +28,7 @@ export default function SearchForm({ setMyFilter }) {
             projectCode: "",
             projectLeader: "",
             projectTelephone: "",
-            status: 1
+            status: ""
         }
     });
 
@@ -46,10 +46,11 @@ export default function SearchForm({ setMyFilter }) {
                 projectCode: "",
                 projectLeader: "",
                 projectTelephone: "",
-                status: 1
+                status: ""
             }
         })
     }
+    console.log('search form');
 
     return (
         <Paper sx={{ p: 3, mb: 3 }}>
