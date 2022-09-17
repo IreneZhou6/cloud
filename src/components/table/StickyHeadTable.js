@@ -95,6 +95,10 @@ export default function StickyHeadTable({ data, setMyFilter }) {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
+                labelRowsPerPage={<span>每页行数：</span>}
+                labelDisplayedRows={({ page, count }) => {
+                    return `共${count}条记录 第${page + 1}页`;
+                }}
             />
         </Paper>
     );
