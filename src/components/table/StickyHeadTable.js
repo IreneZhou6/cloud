@@ -8,27 +8,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import CustomModal from "../modal/CustomModal";
 
-const columns = [
-    { id: 'applicationName', label: '应用名称', minWidth: 170 },
-    { id: 'projectName', label: '项目名称', minWidth: 170 },
-    { id: 'projectCode', label: '项目编码', minWidth: 100 },
-    { id: 'projectLeader', label: '申请人', minWidth: 100 },
-    { id: 'projectTelephone', label: '申请人联系方式', minWidth: 170 },
-    { id: 'status', label: '运行状态', minWidth: 90 },
-    { id: 'uptime', label: '上线日期', minWidth: 170 },
-    { id: 'downtime', label: '下线日期', minWidth: 170 },
-    { id: 'level', label: '等保定级', minWidth: 90 },
-    { id: 'packageNum', label: '云资源数', minWidth: 90 },
-    { id: 'operation', label: '操作', minWidth: 80 },
-];
-// { list, pageNum, size, total, totalpage }
-export default function StickyHeadTable({ data, setMyFilter }) {
+export default function StickyHeadTable({ data, setMyFilter, columns, operation }) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const handleChangePage = (event, newPage) => {
-        // console.log(newPage);
         setPage(newPage);
         setMyFilter((prev) => {
             return { ...prev, pageNum: newPage + 1 }
@@ -37,7 +23,6 @@ export default function StickyHeadTable({ data, setMyFilter }) {
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        console.log(+event.target.value);
         setMyFilter((prev) => {
             return { ...prev, pageSize: +event.target.value }
         });
@@ -45,8 +30,7 @@ export default function StickyHeadTable({ data, setMyFilter }) {
     };
 
     const rows = data.list;
-    // const pageCount = Math.ceil(data.total / rowsPerPage);
-    console.log('table');
+    console.log(rows);
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden', p: 3 }}>
@@ -67,17 +51,16 @@ export default function StickyHeadTable({ data, setMyFilter }) {
                     </TableHead>
                     <TableBody>
                         {rows
-                            // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                        {columns.map((column) => {
+                                        {columns.map((column, index) => {
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number'
-                                                        ? column.format(value)
-                                                        : value}
+                                                    {column.id !== 'operation' ? value :
+                                                        <CustomModal disabled={row.packageNum ? false : true} operation={operation} projectId={row.id} />
+                                                    }
                                                 </TableCell>
                                             );
                                         })}
@@ -96,8 +79,8 @@ export default function StickyHeadTable({ data, setMyFilter }) {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
                 labelRowsPerPage={<span>每页行数：</span>}
-                labelDisplayedRows={({ page, count }) => {
-                    return `共${count}条记录 第${page + 1}页`;
+                labelDisplayedRows={({ page, count, from, to }) => {
+                    return `共${count}条记录 ${from}-${to} / ${count}`;
                 }}
             />
         </Paper>

@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -8,9 +10,6 @@ import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBullet
 import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined';
 import CloudOutlinedIcon from '@mui/icons-material/CloudOutlined';
 import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
-
-import { Link } from 'react-router-dom';
-
 
 export default function Menu({ menuName, path, id, open }) {
     let Icon = () => { <p>##</p> };
@@ -33,7 +32,7 @@ export default function Menu({ menuName, path, id, open }) {
         default:
             break;
     }
-    // const iconArray = [{ id: 1, icon: <HomeOutlinedIcon /> }, { id: 3, icon: <FormatListBulletedOutlinedIcon /> }, { id: 4, icon: <AccountTreeOutlinedIcon /> }];
+
     return (
         <>
             <ListItem disablePadding sx={{ display: 'block' }}>
@@ -43,7 +42,7 @@ export default function Menu({ menuName, path, id, open }) {
                         justifyContent: open ? 'initial' : 'center',
                         px: 2.5
                     }}>
-                    <Link to={path} >
+                    <NavLink to={path}>
                         <ListItemIcon
                             sx={{
                                 minWidth: 0,
@@ -54,7 +53,7 @@ export default function Menu({ menuName, path, id, open }) {
                             <Icon />
                         </ListItemIcon>
                         <span style={{ display: open ? 'inline-block' : 'none' }}>{menuName}</span>
-                    </Link>
+                    </NavLink>
                 </ListItemButton>
             </ListItem>
             <Divider />

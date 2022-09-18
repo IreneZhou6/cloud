@@ -1,5 +1,10 @@
+import Paper from '@mui/material/Paper';
+
+
 export default function CloudServiceOrder() {
     return (
-        <p>Cloud service order</p>
+        <Paper sx={{ width: '100%', overflow: 'hidden', p: 3 }}>
+            Cloud service order
+        </Paper>
     )
 }

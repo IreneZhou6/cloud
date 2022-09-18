@@ -40,10 +40,25 @@ export default function CloudResourceOrder() {
     console.log(tableData);
     console.log('cloud source page')
 
+
+    const columns = [
+        { id: 'applicationName', label: '应用名称', minWidth: 170 },
+        { id: 'projectName', label: '项目名称', minWidth: 170 },
+        { id: 'projectCode', label: '项目编码', minWidth: 100 },
+        { id: 'projectLeader', label: '申请人', minWidth: 100 },
+        { id: 'projectTelephone', label: '申请人联系方式', minWidth: 170 },
+        { id: 'status', label: '运行状态', minWidth: 90 },
+        { id: 'uptime', label: '上线日期', minWidth: 170 },
+        { id: 'downtime', label: '下线日期', minWidth: 170 },
+        { id: 'level', label: '等保定级', minWidth: 90 },
+        { id: 'packageNum', label: '云资源数', minWidth: 90 },
+        { id: 'operation', label: '操作', minWidth: 80 },
+    ];
+
     return (
         <div>
             <SearchForm setMyFilter={setMyFilter} />
-            {tableData ? <StickyHeadTable data={tableData} setMyFilter={setMyFilter} /> : <Paper sx={{ width: '100%', overflow: 'hidden', p: 3 }}>loading</Paper>}
+            {tableData ? <StickyHeadTable data={tableData} setMyFilter={setMyFilter} columns={columns} operation={'云资源详情'} /> : <Paper sx={{ width: '100%', overflow: 'hidden', p: 3 }}>loading</Paper>}
         </div>
     )
 }

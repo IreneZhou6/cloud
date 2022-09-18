@@ -7,6 +7,34 @@ export default function MenuLi({ open }) {
     const dataRef = useRef();
     const [fetchedData, setFetchedData] = useState(null);
 
+    const menuInfo = [
+        {
+            menuId: 1,
+            menuName: "数据统计",
+            path: "/home",
+            children: []
+        }, {
+            menuId: 3,
+            menuName: "应用列表",
+            path: "/order/applicationOrder",
+            children: []
+        }, {
+            menuId: 4,
+            menuName: "项目列表",
+            path: "/order/projectOrder",
+            children: []
+        }, {
+            menuId: 5,
+            menuName: "云资源列表",
+            path: "/order/cloudResourceOrder",
+            children: []
+        }, {
+            menuId: 53,
+            menuName: "云服务订单",
+            path: "/order/cloudServiceOrder",
+            children: []
+        }]
+
     useEffect(() => {
         fetch('/api/v1/user/userInfo', {
             headers: {
@@ -17,12 +45,11 @@ export default function MenuLi({ open }) {
             .then(({ data }) => {
                 dataRef.current = data;
                 console.log(data);
-                console.log(`inside ${dataRef.current}`);
+                // console.log(`inside ${dataRef.current}`);
                 setFetchedData(dataRef.current);
             })
             .catch(err => console.log(err));
-        console.log(`outside promise ${fetchedData}`);
-        console.log(dataRef.current);
+        // console.log(dataRef.current);
     }, [])
 
     return (
